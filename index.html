@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./dress.css">
+    <title>Image Fetch by Api</title>
+</head>
+<body>
+<!--Get Your dance-->    
+<div class="dis">
+    <h1>Hii!</h1>
+    <h3>Here we are fetching Image From an api</h3>
+</div>
+<div class="results">
+    <div id="dance_result" class="result">
+        <p>Random dance pic</p>
+    </div>
+</div>
+    
+        <div class="buttons">
+    <button id="dance_btn">Get dance</button>
+    </div>
+<!--Js-->
+<script>
+const dance_btn = document.getElementById('dance_btn');
+const dance_result = document.getElementById('dance_result');
+dance_btn.addEventListener('click', getRandomdance);
+
+//dance
+function getRandomdance() {
+fetch('https://api.waifu.pics/sfw/dance')
+    .then(res => res.json())
+    .then(data => {
+        if(data.url.includes('.mp4')) {
+            getRandomdance();
+        }
+        else {
+            dance_result.innerHTML = `<img src=${data.url} alt="dance" />`;
+        }
+    });
+}
+</script>
+
+</body>
+</html>
